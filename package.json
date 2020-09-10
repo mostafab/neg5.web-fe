@@ -1,28 +1,37 @@
 {
-  "name": "razzle-examples-with-redux",
-  "version": "1.0.0",
-  "license": "MIT",
+  "name": "neg5-web-fe",
+  "version": "0.0.1",
+  "description": "A react-server instance",
+  "main": "HelloWorld.js",
   "scripts": {
-    "start": "razzle start",
-    "build": "razzle build",
-    "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node build/server.js"
+    "start": "react-server start",
+    "lint": "eslint test.js pages",
+    "test": "npm run lint && nsp check && ava test.js"
   },
+  "license": "Apache-2.0",
   "dependencies": {
-    "antd": "4.6.3",
-    "body-parser": "1.19.0",
-    "express": "^4.17.1",
-    "express-http-proxy": "1.6.0",
-    "prop-types": "^15.7.2",
-    "qs": "^6.9.3",
+    "babel-preset-react-server": "^0.6.0",
+    "babel-runtime": "^6.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
+    "react-redux": "^7.2.1",
+    "react-server": "1.0.0-alpha.2",
+    "react-server-cli": "^0.8.1",
+    "react-server-redux": "^0.8.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^3.0.0"
+    "superagent": "1.8.4",
+    "webpack": "4.44.1",
+    "webpack-dev-server": "3.11.0",
+    "chunk-manifest-webpack-plugin": "1.1.2",
+    "webpack-stats-plugin": "0.3.2"
   },
   "devDependencies": {
-    "razzle": "latest"
+    "ava": "^0.17.0",
+    "babel-eslint": "^7.1.0",
+    "eslint": "^3.11.1",
+    "eslint-plugin-react": "6.7.1",
+    "nsp": "^2.3.3",
+    "react-hot-loader": "^4.12.21"
   }
 }

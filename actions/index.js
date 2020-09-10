@@ -7,9 +7,11 @@ export const set = value => ({
   payload: value,
 });
 
-export const increment = () => ({
-  type: INCREMENT_COUNTER,
-});
+export const increment = () => {
+  return {
+    type: INCREMENT_COUNTER,
+  }
+}
 
 export const decrement = () => ({
   type: DECREMENT_COUNTER,
