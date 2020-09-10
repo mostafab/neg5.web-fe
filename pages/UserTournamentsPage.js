@@ -4,9 +4,10 @@ import { Provider } from 'react-redux'
 import { ReduxAdapter } from 'react-server-redux';
 
 import configureStore from './../store';
+
 import App from './../containers/App';
 
-export default class SimplePage {
+export default class UserTournamentsPage {
 
 	handleRoute() {
 		this.store = configureStore({
