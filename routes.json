@@ -1,5 +1,7 @@
 {
-  "middleware": [],
+  "middleware": [
+    "./middleware/request-to-port"
+  ],
   "routes": {
     "UserTournaments": {
       "path": "/tournaments",

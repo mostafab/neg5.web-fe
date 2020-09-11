@@ -1,5 +1,5 @@
 import React from 'react';
-import { RootElement } from 'react-server'
+import { RootElement } from 'react-server';
 import { Provider } from 'react-redux'
 import { ReduxAdapter } from 'react-server-redux';
 
@@ -9,7 +9,7 @@ import App from './../containers/App';
 
 export default class UserTournamentsPage {
 
-	handleRoute() {
+	async handleRoute() {
 		this.store = configureStore({
 			counter: 2,
 		});
@@ -20,7 +20,7 @@ export default class UserTournamentsPage {
 	}
 
 	getTitle() {
-		return 'Neg 5'
+		return 'My Tournaments | Neg 5'
 	}
 
 	getElements() {

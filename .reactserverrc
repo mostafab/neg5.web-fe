@@ -15,5 +15,6 @@
     "production": {
        "port": "80"
     }
-  }
+  },
+  "customMiddlewarePath": "server/expressMiddleware.js"
 }
