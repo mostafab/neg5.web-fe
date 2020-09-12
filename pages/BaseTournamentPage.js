@@ -1,5 +1,5 @@
 import React from 'react';
-import { RootElement } from 'react-server';
+import { RootElement, RootContainer } from 'react-server';
 import { Provider } from 'react-redux'
 import { ReduxAdapter } from 'react-server-redux';
 
@@ -14,6 +14,8 @@ import { fetchTournament, fetchTournamentTeams } from './../actions/single-tourn
 import { REDUCER_KEYS } from '../reducers';
 
 import TournamentPageSidebar from './../containers/TournamentPageSidebar';
+
+import './BaseTournamentPage.less';
 
 export default class BaseTournamentPage {
 
@@ -66,12 +68,19 @@ export default class BaseTournamentPage {
 
     getSidebarElements() {
         return (
-            <RootElement when={this.criticalInformationLoaded()}>
+            <RootElement className="Sidebar" when={this.criticalInformationLoaded()}>
                 <Provider store={this.store}>
-                    <TournamentPageSidebar />
+                    <TournamentPageSidebar {...this.getOpenAndSelectedSideBarKeys()}/>
                 </Provider>
             </RootElement>
         )
+    }
+
+    getOpenAndSelectedSideBarKeys() {
+        return {
+            selectedKeys: ['tournament'],
+            openKeys: []
+        }
     }
 
     getElements() {
@@ -82,7 +91,12 @@ export default class BaseTournamentPage {
                     <UserHeader title={title} />
                 </Provider>
             </RootElement>,
-            this.getSidebarElements(),
+            <RootContainer key={1} className="TournamentPageMainContext">
+                { this.getSidebarElements() }
+                <div className="main-content">
+                    { this.getMainContent() }
+                </div>
+            </RootContainer>
         ]
     }
 }
