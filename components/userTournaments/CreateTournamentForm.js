@@ -1,10 +1,22 @@
 import React, { Fragment } from 'react';
-import { Form, Input, DatePicker, Button, Card, Checkbox, InputNumber, Modal } from 'antd';
+import {
+    Form,
+    Input,
+    DatePicker,
+    Button,
+    Checkbox,
+    InputNumber,
+    Modal,
+    Select,
+    Tooltip
+} from 'antd';
 
 import { TOURNAMENT_FORM_STAGES } from './../../util/constant';
 import DateUtil from './../../util/date';
 
 import './CreateTournamentForm.less';
+
+const FORM_NAME = 'create-tournament-form';
 
 const renderStage = (stage, currentStage, element) => {
     return (
@@ -24,12 +36,11 @@ const CreateTournamentForm = ({
 }) => {
 
     const [ form ] = Form.useForm();
-    const onFinish = () => {
-        form.validateFields()
-            .then(() => onSubmit({
-                ...form.getFieldsValue(),
-                tournamentDate: DateUtil.momentToDate(form.getFieldValue('tournamentDate')),                
-            }));
+    const onFinish = fields => {
+        onSubmit({
+            ...fields,
+            tournamentDate: DateUtil.momentToDate(fields.tournamentDate),                
+        })
     }
     const onReset = () => form.resetFields();
 
@@ -70,6 +81,60 @@ const CreateTournamentForm = ({
             <Form.Item name="maxActivePlayersPerTeam" label="Team Size">
                 <InputNumber type="number" />
             </Form.Item>
+            <Form.List name="tossupValues">
+                {
+                    (fields, { add, remove }) => {
+                        return (
+                            <div className="answer-types-container">
+                                {
+                                    fields.map((field, idx) => (
+                                        <Input.Group
+                                            key={field.key}
+                                            compact
+                                        >
+                                            <Form.Item
+                                                label={idx === 0 ? 'Value' : null}
+                                                name={[field.name, "value"]}
+                                                className="pv"
+                                            >
+                                                <InputNumber type="number" />
+                                            </Form.Item>
+                                            <Form.Item
+                                                label={idx === 0 ? 'Type' : null}
+                                                name={[field.name, "answerType"]}
+                                                className="pv"
+                                            >
+                                                <Select style={{ width: 120 }}>
+                                                    <Select.Option value="Neg">Neg</Select.Option>
+                                                    <Select.Option value="Base">Base</Select.Option>
+                                                    <Select.Option value="Power">Power</Select.Option>
+                                                </Select>
+                                            </Form.Item>
+                                        </Input.Group>
+                                    ))
+                                }
+                                <Button
+                                    type="link"
+                                    onClick={() => add()}
+                                    >
+                                    {
+                                        fields.length === 0
+                                            ? <Tooltip 
+                                                title={
+                                                    "The point scheme will default to standard NAQT rules "
+                                                        + "with tossups worth 10, powers worth 15 and negs worth -5."
+                                                }
+                                            >
+                                                Add custom point scheme
+                                            </Tooltip>
+                                            : 'Add another'
+                                    }
+                                </Button>
+                            </div>
+                        )
+                    }
+                }
+            </Form.List>
         </Fragment>
     )
     const title = stage === TOURNAMENT_FORM_STAGES.BASIC_INFO
@@ -104,22 +169,12 @@ const CreateTournamentForm = ({
         ]
         : [
             <Button
-                key="back"
-                className="back-button"
-                type="default"
-                onClick={() => onGoToStage(TOURNAMENT_FORM_STAGES.BASIC_INFO)}
-                disabled={submitting}
-                htmlType="button"
-            >
-                Back
-            </Button>,
-            <Button
                 key="submit"
+                form={FORM_NAME}
                 className="next-button"
                 type="primary"
                 htmlType="submit"
                 loading={submitting}
-                onClick={() => onFinish()}
             >
                 Finish
             </Button>
@@ -136,12 +191,14 @@ const CreateTournamentForm = ({
             okText="Create"
         >
             <Form
-                name="create-tournament-form"
+                name={FORM_NAME}
                 labelCol={{ span: 10 }}
                 wrapperCol={{ span: 40 }}
                 layout="horizontal"
-                size="large"
+                size="middle"
+                className="CreateTournamentForm"
                 form={form}
+                onFinish={onFinish}
                 initialValues={defaultValues}
             >
                 { basicInfo }

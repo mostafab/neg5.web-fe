@@ -1,6 +1,8 @@
 import React from 'react';
 import { PageHeader } from 'antd';
 
+import './UserHeader.less';
+
 const UserHeader = ({
     currentUser,
     title
