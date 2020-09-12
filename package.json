@@ -17,6 +17,7 @@
     "chunk-manifest-webpack-plugin": "1.1.2",
     "express-http-proxy": "^1.6.2",
     "http-proxy-middleware": "^1.0.5",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",

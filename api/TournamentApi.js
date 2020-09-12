@@ -15,5 +15,13 @@ export default {
                 .then(res => resolve(res.body))
                 .catch(err => reject(err));
         })
+    },
+
+    getTournament(id) {
+        return new Promise((resolve, reject) => {
+            return ReactServerAgent.get(`/neg5-api/tournaments/${id}`)
+                .then(res => resolve(res.body))
+                .catch(err => reject(err))
+        });
     }
 }

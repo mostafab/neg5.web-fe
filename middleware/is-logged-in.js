@@ -3,18 +3,11 @@ import UserApi from './../api/UserApi';
 import RLS from './../util/rls';
 
 export default class RequireLoggedInUser {
-    async handleRoute(next) {
-        let user;
-        try {
-            user = await UserApi.getCurrentUser();
-            if (!user) {
-                return this.getRedirect();
-            }
-        } catch (e) {
-            console.error(e);
+    handleRoute(next) {
+        const user = RLS.get().currentUser;
+        if (!user) {
             return this.getRedirect();
         }
-        RLS.get().currentUser = user;
         return next();
     }
 

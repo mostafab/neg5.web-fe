@@ -52,16 +52,16 @@ const CreateTournamentForm = ({
                 name="name"
                 label="Name"
                 rules={[{ required: true, message: 'Please provide a name.' }]}>
-                <Input />
+                <Input autoComplete="off" />
             </Form.Item>  
             <Form.Item name="tournamentDate" label="Date">
                 <DatePicker />
             </Form.Item>
             <Form.Item name="location" label="Location">
-                <Input />
+                <Input autoComplete="off" />
             </Form.Item>  
             <Form.Item name="questionSet" label="Question Set">
-                <Input />
+                <Input autoComplete="off" />
             </Form.Item>
         </Fragment>,
     )
