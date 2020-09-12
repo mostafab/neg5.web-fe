@@ -1,10 +1,11 @@
 {
   "middleware": [
-    "./middleware/request-to-port"
+    "./middleware/request-to-port",
+    "./middleware/css-middleware"
   ],
   "routes": {
     "UserTournaments": {
-      "path": "/tournaments",
+      "path": ["/tournaments", "/home"],
       "page": "pages/UserTournamentsPage.js"
     }
   }
