@@ -14,7 +14,7 @@
     },
     "production": {
        "port": "80",
-       "compileOnStartup": false,
+       "compileOnStartup": true,
        "jsUrl": "/assets/",
        "logLevel": "error",
        "minify": true,
