@@ -1,5 +1,7 @@
 import React from 'react';
-import { Typography, Card } from 'antd';
+import { Typography } from 'antd';
+
+import TeamMatches from './TeamMatches';
 
 import './TeamView.less';
 
@@ -14,9 +16,7 @@ const TeamView = ({
     return (
         <div className="TeamView">
             <Title level={2}>{ name }</Title>
-            <Card title="Team Matches">
-                { JSON.stringify(matches) }
-            </Card>
+            <TeamMatches matches={matches} />
         </div>
     )
 }

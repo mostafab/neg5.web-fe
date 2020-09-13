@@ -1,8 +1,9 @@
 {
   "routesFile": "./routes.json",
   "host": "0.0.0.0",
+  "port": 3000,
   "jsPort": 3001,
-  "hot": false,
+  "hot": true,
   "minify": false,
   "longTermCaching": false,
   "https": false,
@@ -12,11 +13,12 @@
       "port": "4000"
     },
     "production": {
-       "compileOnStartup": true,
-       "jsUrl": "/assets/",
-       "logLevel": "error",
-       "minify": true,
-       "longTermCaching": true
+        "port": "80",
+        "compileOnStartup": true,
+        "logLevel": "error",
+        "minify": true,
+        "longTermCaching": true,
+        "hot": false
     }
   },
   "customMiddlewarePath": "server/expressMiddleware.js"
