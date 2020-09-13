@@ -1,9 +1,13 @@
+import React from 'react';
+
+import TournamentCard from './TournamentCard';
+
 export default ({
     tournament
 }) => {
     return (
-        <div>
-
+        <div className="TournamentPageContent">
+            {/* <TournamentCard {...tournament} /> */}
         </div>
     )
 }

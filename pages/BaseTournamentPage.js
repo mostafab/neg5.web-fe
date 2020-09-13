@@ -10,10 +10,14 @@ import configureStore from './../store';
 
 import RLS from './../util/rls';
 
-import { fetchTournament, fetchTournamentTeams } from './../actions/single-tournament';
+import {
+    fetchTournament
+} from './../actions/single-tournament';
+
 import { REDUCER_KEYS } from '../reducers';
 
 import TournamentPageSidebar from './../containers/TournamentPageSidebar';
+import { Panes } from './../components/tournament/TournamentPageSidebar';
 
 import './BaseTournamentPage.less';
 
@@ -28,8 +32,8 @@ export default class BaseTournamentPage {
 			[REDUCER_KEYS.currentUser]: RLS.get().currentUser,
 		});
         this.storeAdapter = new ReduxAdapter(this.store);
-
         this.dispatchForCriticalData();
+
         return this.storeAdapter.when([REDUCER_KEYS.currentTournament])
             .then(() => {
                 return {
@@ -51,18 +55,20 @@ export default class BaseTournamentPage {
         return this.storeAdapter;
     }
 
+    getTournamentId() {
+        return this.getRequest().getRouteParams().tournamentId;
+    }
+
     getMainContent() {}
 
     dispatchForCriticalData() {
         const tournamentId = this.getRequest().getRouteParams().tournamentId;
         this.store.dispatch(fetchTournament(tournamentId));
-        this.store.dispatch(fetchTournamentTeams(tournamentId));
     }
 
     criticalInformationLoaded() {
         return this.storeAdapter.when([
             REDUCER_KEYS.currentTournament,
-            REDUCER_KEYS.tournamentTeams,
         ]);
     }
 
@@ -70,17 +76,14 @@ export default class BaseTournamentPage {
         return (
             <RootElement className="Sidebar" when={this.criticalInformationLoaded()}>
                 <Provider store={this.store}>
-                    <TournamentPageSidebar {...this.getOpenAndSelectedSideBarKeys()}/>
+                    <TournamentPageSidebar pane={this.getSelectedPane()} />
                 </Provider>
             </RootElement>
         )
     }
 
-    getOpenAndSelectedSideBarKeys() {
-        return {
-            selectedKeys: ['tournament'],
-            openKeys: []
-        }
+    getSelectedPane() {
+        return Panes.TOURNAMENT;
     }
 
     getElements() {
@@ -93,9 +96,7 @@ export default class BaseTournamentPage {
             </RootElement>,
             <RootContainer key={1} className="TournamentPageMainContext">
                 { this.getSidebarElements() }
-                <div className="main-content">
-                    { this.getMainContent() }
-                </div>
+                { this.getMainContent() }
             </RootContainer>
         ]
     }

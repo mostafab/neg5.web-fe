@@ -12,6 +12,14 @@
     "TournamentInfoPage": {
       "path": ["/tournaments/:tournamentId"],
       "page": "pages/TournamentInfoPage.js"
+    },
+    "TournamentTeamsPage": {
+      "path": ["/tournaments/:tournamentId/teams"],
+      "page": "pages/TournamentTeamsPage.js"
+    },
+    "TournamentMatchesPage": {
+      "path": ["/tournaments/:tournamentId/matches"],
+      "page": "pages/TournamentMatchesPage.js"
     }
   }
 }

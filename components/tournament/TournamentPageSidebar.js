@@ -5,45 +5,80 @@ import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
+import './TournamentPageSidebar.less';
+
+export const Panes = {
+    TOURNAMENT: 'tournament',
+    TEAM: 'teams',
+    MATCHES: 'matches',
+}
+
 export default ({
     tournament,
     teams,
-    selectedKeys,
+    matches,
+    numMatches,
+    pane,
     openKeys
 }) => {
     return (
         <Menu
             style={{ height: '100vh' }}
-            defaultSelectedKeys={selectedKeys || []}
-            defaultOpenKeys={openKeys || []}
+            defaultSelectedKeys={pane}
             mode="inline"
+            className="TournamentPageSidebar"
         >
             <Menu.Item
-                key="tournament"
+                key={Panes.TOURNAMENT}
+                className="tournament-header"
             >
-                <Link path={`/tournaments/${tournament.id}`} reuseDom>
-                    { tournament.name }
-                </Link>
+                <Link path={`/tournaments/${tournament.id}`}>Overview</Link>
             </Menu.Item>
-            <SubMenu key="teams" title="Teams">
+            <Menu.Item key={Panes.TEAM}>
+                <Link path={`/tournaments/${tournament.id}/teams`}>Teams</Link>
+            </Menu.Item>
+            <Menu.Item key={Panes.MATCHES}>
+                <Link path={`/tournaments/${tournament.id}/matches`}>Matches</Link>
+            </Menu.Item>
+            {/* <SubMenu key="teams" title={`Teams (${teams.length})`}>
                 {
-                    teams.map(team => <Menu.Item key={`team-${team.id}`}>{team.name}</Menu.Item>)
+                    teams.map(team =>
+                        <Menu.Item key={`team-${team.id}`}>
+                            <Link path={`/tournaments/${tournament.id}/teams/${team.id}`}>
+                                {team.name}
+                            </Link>
+                        </Menu.Item>
+                    )
                 }
             </SubMenu>
             <SubMenu
                 key="matches"
-                title="Matches"
+                title={`Matches (${numMatches})`}
             >
-                <SubMenu key="round-1" title="Round 1">
-                    <Menu.Item key="9">Option 9</Menu.Item>
-                </SubMenu>
-                <SubMenu key="round-2" title="Round 2">
-                    <Menu.Item key="10">Option 9</Menu.Item>
-                </SubMenu>
-                <SubMenu key="round-3" title="Round 3">
-                    <Menu.Item key="11">Option 9</Menu.Item>
-                </SubMenu>
-            </SubMenu>
+                {
+                    matches.map(({ round, matches }) => {
+                        return (
+                            <SubMenu
+                                key={`round-${round}`}
+                                title={`Round ${round} (${matches.length})`}
+                            >
+                                {
+                                    matches.map(m => {
+                                        const firstTeam = m.teams[0];
+                                        const secondTeam = m.teams[1];
+                                        const description = `${firstTeam.name} (${firstTeam.score}) - ${secondTeam.name} (${secondTeam.score})`
+                                        return (
+                                            <Menu.Item key={`match-${m.id}`}>
+                                                { description }
+                                            </Menu.Item>
+                                        )
+                                    })
+                                }
+                            </SubMenu>
+                        )
+                    })
+                }
+            </SubMenu> */}
         </Menu>
     );
 }
