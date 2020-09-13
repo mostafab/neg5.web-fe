@@ -96,7 +96,9 @@ export default class BaseTournamentPage {
             </RootElement>,
             <RootContainer key={1} className="TournamentPageMainContext">
                 { this.getSidebarElements() }
-                { this.getMainContent() }
+                <RootContainer className="page-content">
+                    { this.getMainContent() }
+                </RootContainer>
             </RootContainer>
         ]
     }

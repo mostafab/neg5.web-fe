@@ -6,23 +6,28 @@ import BaseTournamentPage from './BaseTournamentPage';
 
 import { REDUCER_KEYS } from '../reducers';
 
-import TournamentInfoContent from './../containers/TournamentInfoContent';
+import TournamentTeams from './../containers/TournamentTeams';
 
 import { Panes } from './../components/tournament/TournamentPageSidebar';
-import { fetchTournamentTeams } from './../actions/single-tournament';
+import { fetchTournamentMatches, fetchTournamentTeams } from './../actions/single-tournament';
 
 export default class TournamentTeamsPage extends BaseTournamentPage {
 
     dispatchForCriticalData() {
         super.dispatchForCriticalData();
+        this.getStore().dispatch(fetchTournamentMatches(this.getTournamentId()));
         this.getStore().dispatch(fetchTournamentTeams(this.getTournamentId()));
     }
 
     getMainContent() {
         return [
-            <RootElement key="tournamentTeams" when={this.storeAdapter.when([REDUCER_KEYS.currentTournament])}>
+            <RootElement key="tournamentTeams" when={this.storeAdapter.when([
+                REDUCER_KEYS.currentTournament,
+                REDUCER_KEYS.tournamentMatches,
+                REDUCER_KEYS.tournamentTeams,
+            ])}>
                 <Provider store={this.getStore()}>
-                    <TournamentInfoContent />
+                    <TournamentTeams />
                 </Provider>
             </RootElement>
         ]

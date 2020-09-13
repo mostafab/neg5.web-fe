@@ -11,9 +11,8 @@ const MatchesMenu = ({
     return (
         <div className="TournamentMatches">
             <Menu
-                style={{ height: '100vh', width: 300 }}
+                style={{ height: '100vh', width: 400 }}
                 mode="inline"
-                className="TournamentPageSidebar"
                 defaultOpenKeys={["matches"]}
             >
                 <Menu.Item key="add-match">
