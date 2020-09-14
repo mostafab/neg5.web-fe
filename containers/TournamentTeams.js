@@ -32,6 +32,7 @@ const enrichSelectedTeam = (selectedTeam, teams, matches) => {
     return {
         ...selectedTeam,
         matches: orderBy(matchesWithTeam, ['round']),
+        players: orderBy(selectedTeam.players || [], ['name']),
     };
 }
 
@@ -41,8 +42,9 @@ const mapStateToProps = state => {
         selectedTeam: enrichSelectedTeam(
             state.tournamentTeams.selectedTeam,
             state.tournamentTeams.teams,
-            state.tournamentMatches.matches
+            state.tournamentMatches.matches,
         ),
+        tournament: state.currentTournament,
       }
 };
 

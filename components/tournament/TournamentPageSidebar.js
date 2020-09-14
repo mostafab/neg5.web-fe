@@ -1,9 +1,5 @@
 import React from 'react';
-import { Link } from 'react-server';
-
 import { Menu } from 'antd';
-
-const { SubMenu } = Menu;
 
 import './TournamentPageSidebar.less';
 
@@ -11,15 +7,12 @@ export const Panes = {
     TOURNAMENT: 'tournament',
     TEAM: 'teams',
     MATCHES: 'matches',
+    SCORESHEET: 'scoresheet',
 }
 
 export default ({
     tournament,
-    teams,
-    matches,
-    numMatches,
     pane,
-    openKeys
 }) => {
     return (
         <Menu
@@ -32,53 +25,17 @@ export default ({
                 key={Panes.TOURNAMENT}
                 className="tournament-header"
             >
-                <Link path={`/tournaments/${tournament.id}`}>Overview</Link>
+                <a href={`/tournaments/${tournament.id}`}>Overview</a>
             </Menu.Item>
             <Menu.Item key={Panes.TEAM}>
-                <Link path={`/tournaments/${tournament.id}/teams`}>Teams</Link>
+                <a href={`/tournaments/${tournament.id}/teams`}>Teams</a>
             </Menu.Item>
             <Menu.Item key={Panes.MATCHES}>
-                <Link path={`/tournaments/${tournament.id}/matches`}>Matches</Link>
+                <a href={`/tournaments/${tournament.id}/matches`}>Matches</a>
             </Menu.Item>
-            {/* <SubMenu key="teams" title={`Teams (${teams.length})`}>
-                {
-                    teams.map(team =>
-                        <Menu.Item key={`team-${team.id}`}>
-                            <Link path={`/tournaments/${tournament.id}/teams/${team.id}`}>
-                                {team.name}
-                            </Link>
-                        </Menu.Item>
-                    )
-                }
-            </SubMenu>
-            <SubMenu
-                key="matches"
-                title={`Matches (${numMatches})`}
-            >
-                {
-                    matches.map(({ round, matches }) => {
-                        return (
-                            <SubMenu
-                                key={`round-${round}`}
-                                title={`Round ${round} (${matches.length})`}
-                            >
-                                {
-                                    matches.map(m => {
-                                        const firstTeam = m.teams[0];
-                                        const secondTeam = m.teams[1];
-                                        const description = `${firstTeam.name} (${firstTeam.score}) - ${secondTeam.name} (${secondTeam.score})`
-                                        return (
-                                            <Menu.Item key={`match-${m.id}`}>
-                                                { description }
-                                            </Menu.Item>
-                                        )
-                                    })
-                                }
-                            </SubMenu>
-                        )
-                    })
-                }
-            </SubMenu> */}
+            <Menu.Item key={Panes.SCORESHEET}>
+                <a href={`/tournaments/${tournament.id}/scoresheet`}>Scoresheet</a>
+            </Menu.Item>
         </Menu>
     );
 }

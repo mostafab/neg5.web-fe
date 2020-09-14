@@ -11,9 +11,11 @@ export const fetchTournamentSuccess = payload => ({
     payload
 });
 
-export const fetchTournamentTeamsSuccess = payload => ({
+export const fetchTournamentTeamsSuccess = (teams) => ({
     type: FETCH_TOURNAMENT_TEAMS_SUCCESS,
-    payload,
+    payload: {
+        teams,
+    }
 })
 
 export const fetchTournamentMatchesSuccess = payload => ({
@@ -26,7 +28,7 @@ export const fetchTournament = tournamentId => async dispatch => {
     dispatch(fetchTournamentSuccess(tournament));
 };
 
-export const fetchTournamentTeams = tournamentId => async dispatch => {
+export const fetchTournamentTeams = (tournamentId) => async dispatch => {
     const teams = await TeamApi.getTournamentTeams(tournamentId);
     dispatch(fetchTournamentTeamsSuccess(teams));
 }

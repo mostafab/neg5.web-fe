@@ -6,7 +6,7 @@ const reducer = (state = null, action) => {
         case FETCH_TOURNAMENT_TEAMS_SUCCESS:
             return {
                 ...state,
-                teams: action.payload,
+                teams: action.payload.teams,
             }
         case SELECT_TEAM:
             return {

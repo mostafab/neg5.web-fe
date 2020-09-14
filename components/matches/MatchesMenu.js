@@ -18,9 +18,6 @@ const MatchesMenu = ({
                 <Menu.Item key="add-match">
                     Add Match
                 </Menu.Item>
-                <Menu.Item key="start-match">
-                    Start a Scoresheet
-                </Menu.Item>
                 {
                     <SubMenu
                         key="matches"

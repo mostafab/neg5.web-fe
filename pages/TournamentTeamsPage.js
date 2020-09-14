@@ -10,8 +10,26 @@ import TournamentTeams from './../containers/TournamentTeams';
 
 import { Panes } from './../components/tournament/TournamentPageSidebar';
 import { fetchTournamentMatches, fetchTournamentTeams } from './../actions/single-tournament';
+import { selectTeam } from './../actions/team';
 
 export default class TournamentTeamsPage extends BaseTournamentPage {
+
+    async handleRoute() {
+        const selectedTeamId = this.getRequest().getRouteParams().teamId;
+        if (!selectedTeamId) {
+            return super.handleRoute();
+        }
+        await super.handleRoute();
+        await this.storeAdapter.when([REDUCER_KEYS.tournamentTeams]);
+
+        const teams = this.getStore().getState().tournamentTeams.teams;
+        const selected = teams.find(t => t.id === selectedTeamId);
+        this.getStore().dispatch(selectTeam(selected));
+
+        return {
+            code: 200,
+        }
+    }
 
     dispatchForCriticalData() {
         super.dispatchForCriticalData();
