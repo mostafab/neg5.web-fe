@@ -11,7 +11,7 @@ const MatchesMenu = ({
     return (
         <div className="TournamentMatches">
             <Menu
-                style={{ height: '100vh', width: 400 }}
+                style={{ width: 400 }}
                 mode="inline"
                 defaultOpenKeys={["matches"]}
             >

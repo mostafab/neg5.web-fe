@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-server';
 
 import { Card, Table, Empty } from 'antd';
 
@@ -15,6 +14,11 @@ const columns = [
         title: 'Opponent',
         dataIndex: 'opposingTeamName',
         key: 'opponentName',
+        render: (text, match) => {
+            return (
+                <a href={`/tournaments/${match.tournamentId}/teams/${match.opposingTeamId}`}>{ text }</a>
+            )
+        }
     },
     {
         title: 'Score',
@@ -35,9 +39,9 @@ const columns = [
         title: 'View',
         render: (_text, match) => {
             return (
-                <Link path={`/tournaments/${match.tournamentId}/matches/${match.id}`}>
+                <a href={`/tournaments/${match.tournamentId}/matches/${match.id}`}>
                     View
-                </Link>
+                </a>
             )
         },
     }

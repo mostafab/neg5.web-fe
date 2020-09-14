@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Menu } from 'antd';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 
 import './TeamPools.less';
 
@@ -12,9 +13,12 @@ const renderPhaseSubMenu = (phase, pools, teamPools) => {
         <SubMenu key={`phase-${phase.id}`} title={phase.name}>
             {
                 poolsInPhase.map(pool => {
-                    console.log(teamPoolIds.has(pool.id));
+                    const teamInPool = teamPoolIds.has(pool.id);
                     return (
-                        <Menu.Item key={`pool-${pool.id}`}>
+                        <Menu.Item
+                            key={`pool-${pool.id}`}
+                            icon={teamInPool ? <CheckCircleTwoTone twoToneColor="#52c41a" /> : null}
+                        >
                             { pool.name }
                         </Menu.Item>
                     )

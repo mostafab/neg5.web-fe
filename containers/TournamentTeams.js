@@ -25,6 +25,9 @@ const enrichSelectedTeam = (selectedTeam, teams, matches) => {
             opposingTeamName: m.teams[0].teamId === teamId
                 ? teamsById[m.teams[1].teamId].name
                 : teamsById[m.teams[0].teamId].name,
+            opposingTeamId: m.teams[0].teamId === teamId
+                ? m.teams[1].teamId
+                : m.teams[0].teamId,
             tossupsHeard: m.tossupsHeard,
             tournamentId: m.tournamentId,
         }))

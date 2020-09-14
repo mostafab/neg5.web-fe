@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Menu } from 'antd';
 
@@ -15,7 +15,7 @@ const TeamsMenu = ({
     return (
         <div className="TeamsMenu">
             <Menu
-                style={{ height: '100vh', width: 300 }}
+                style={{ minHeight: '100vh', width: 300 }}
                 mode="inline"
                 defaultOpenKeys={["teams"]}
                 selectedKeys={selectedTeamKey}
