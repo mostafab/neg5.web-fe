@@ -2,7 +2,6 @@
   "name": "neg5-web-fe",
   "version": "0.0.1",
   "description": "A react-server instance",
-  "main": "HelloWorld.js",
   "scripts": {
     "start": "react-server start",
     "lint": "eslint test.js pages",
@@ -10,19 +9,26 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/core": "7.1.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
     "antd": "4.6.3",
     "axios": "0.20.0",
-    "babel-preset-react-server": "0.6.0",
-    "babel-runtime": "6.6.1",
+    "babel-loader": "^8.0.4",
+    "babel-preset-react-server": "1.0.0-alpha.2",
     "chunk-manifest-webpack-plugin": "1.1.2",
+    "css-loader": "^4.3.0",
     "express-http-proxy": "1.6.2",
     "http-proxy-middleware": "1.0.5",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.1",
     "lodash": "4.17.20",
+    "mini-css-extract-plugin": "^0.11.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.1",
     "react-server": "1.0.0-alpha.2",
-    "react-server-cli": "0.8.1",
+    "react-server-cli": "1.0.0-alpha.2",
     "react-server-redux": "0.8.0",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
@@ -37,6 +43,7 @@
     "eslint": "3.11.1",
     "eslint-plugin-react": "6.7.1",
     "nsp": "2.3.3",
-    "react-hot-loader": "4.12.21"
+    "react-hot-loader": "4.12.21",
+    "webpack-cli": "^3.3.12"
   }
 }
