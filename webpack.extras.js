@@ -1,19 +1,28 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 export default (webpackConfig) => {
-    console.log(JSON.stringify(webpackConfig, null, 2));
     const config = {
         ...webpackConfig,
+        plugins: [...webpackConfig.plugins, new MiniCssExtractPlugin()],
         module: {
             ...webpackConfig.module,
             rules: [
                 {
                     test: /\.less$/,
-                    use: [{
-                        loader: 'style-loader' // creates style nodes from JS strings
-                      }, {
-                        loader: 'css-loader' // translates CSS into CommonJS
-                      }, {
-                        loader: 'less-loader' // compiles Less to CSS
-                      }]
+                    use: [
+                        {
+                            loader: 'style-loader' // creates style nodes from JS strings
+                        },
+                        {
+                          loader: MiniCssExtractPlugin.loader,
+                        },
+                        {
+                            loader: 'css-loader' // translates CSS into CommonJS
+                        },
+                        {
+                            loader: 'less-loader' // compiles Less to CSS
+                        }
+                    ],
                 },
                 {
                     test: /\.(js|jsx)$/,
@@ -27,7 +36,7 @@ export default (webpackConfig) => {
                 },
                 {
                     test: /\.css$/,
-                    loaders: ['style-loader', 'css-loader'],
+                    use: [MiniCssExtractPlugin.loader, 'css-loader'],
                 },
                 {
                     test: /\.json/,
@@ -37,6 +46,5 @@ export default (webpackConfig) => {
             ]
         }
     }
-    console.log(JSON.stringify(config, null, 2));
     return config;
 }

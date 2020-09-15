@@ -7,7 +7,7 @@
   "longTermCaching": false,
   "https": false,
   "logLevel": "debug",
-  "webpackConfig": "./webpack-extra.js",
+  "webpackConfig": "./webpack.extras.js",
   "env": {
     "development": {
       "port": "3000"
