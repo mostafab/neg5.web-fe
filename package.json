@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A react-server instance",
   "scripts": {
-    "start": "react-server start",
+    "start": "./startup.sh",
     "lint": "eslint test.js pages",
     "test": "npm run lint && nsp check && ava test.js"
   },
