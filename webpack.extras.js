@@ -14,7 +14,7 @@ export default (webpackConfig) => {
                             loader: 'style-loader' // creates style nodes from JS strings
                         },
                         {
-                          loader: MiniCssExtractPlugin.loader,
+                            loader: MiniCssExtractPlugin.loader,
                         },
                         {
                             loader: 'css-loader' // translates CSS into CommonJS

@@ -11,7 +11,7 @@
   "env": {
     "production": {
         "compileOnStartup": true,
-        "logLevel": "error",
+        "logLevel": "info",
         "minify": true,
         "longTermCaching": true,
         "hot": false
