@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { orderBy, groupBy, keyBy } from 'lodash';
+import { groupBy, keyBy } from 'lodash';
 
 import TournamentMatches from './../components/matches/TournamentMatches';
 

@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash';
+
 import { FETCH_TOURNAMENT_SUCCESS } from './../actions/single-tournament';
 
 const reducer = (state = null, action) => {
@@ -6,6 +8,7 @@ const reducer = (state = null, action) => {
             return {
                 ...state,
                 ...action.payload,
+                phases: orderBy(action.payload.phases || [], ['name']),
             }
         default:
             return state;

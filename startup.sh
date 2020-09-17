@@ -2,7 +2,7 @@
 
 if ! [ "$PORT" ]
 then
-    PORT=80
+    PORT=3000
 fi
 
 PORT=$PORT react-server start --port $PORT

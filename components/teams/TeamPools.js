@@ -1,30 +1,39 @@
 import React from 'react';
-import { Card, Menu } from 'antd';
-import { CheckCircleTwoTone } from '@ant-design/icons';
+import { Card, Select } from 'antd';
+import { keyBy } from 'lodash';
 
 import './TeamPools.less';
 
-const { SubMenu } = Menu;
+const { Option } = Select;
 
 const renderPhaseSubMenu = (phase, pools, teamPools) => {
     const poolsInPhase = pools.filter(p => p.phaseId === phase.id);
-    const teamPoolIds = new Set(teamPools.map(tp => tp.id));
+    const teamPoolMap = keyBy(teamPools || [], 'phaseId');
+    const selectedPool = teamPoolMap[phase.id] ? teamPoolMap[phase.id] : null;
     return (
-        <SubMenu key={`phase-${phase.id}`} title={phase.name}>
-            {
-                poolsInPhase.map(pool => {
-                    const teamInPool = teamPoolIds.has(pool.id);
-                    return (
-                        <Menu.Item
-                            key={`pool-${pool.id}`}
-                            icon={teamInPool ? <CheckCircleTwoTone twoToneColor="#52c41a" /> : null}
-                        >
-                            { pool.name }
-                        </Menu.Item>
+        <div className="phase-row" key={phase.id}>
+            <div className="name">{ phase.name }</div>
+            <Select
+                value={selectedPool && selectedPool.id}
+                onChange={val => console.log(`Pool: ${val} Phase ${phase.id}`)}
+            >
+                {
+                    [
+                        <Option value={null} key="null">
+                            N/A
+                        </Option> 
+                    ].concat(
+                        poolsInPhase.map(pool => {
+                            return (
+                                <Option value={pool.id} key={pool.id}>
+                                    { pool.name }
+                                </Option>
+                            )
+                        })
                     )
-                })
-            }
-        </SubMenu>
+                }
+            </Select>
+        </div>
     )
 } 
 
@@ -35,13 +44,8 @@ export default ({
 }) => {
     return (
         <div className="TeamPools">
-            <Card title="Pools">
-                <Menu
-                    selectedKeys={[]}
-                    mode="inline"
-                >
-                    { phases.map(p => renderPhaseSubMenu(p, pools, teamPools)) }
-                </Menu>
+            <Card title="Phases & Pools">
+                { phases.map(p => renderPhaseSubMenu(p, pools, teamPools)) }
             </Card>
         </div>
     )
