@@ -10,7 +10,7 @@ const { Item } = Form;
 
 const initialFormValues = (numPlayers) => ({
     name: null,
-    players: times(numPlayers, () => ({})),
+    players: times(numPlayers, () => ({ name: null })),
 })
 
 const TeamForm = ({

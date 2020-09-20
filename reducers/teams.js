@@ -40,7 +40,6 @@ const reducer = (state = null, action) => {
                 savingNewTeam: false,
                 addingTeam: action.payload.addAnother || false,
                 teams: [...state.teams, action.payload.team],
-                selectedTeam: action.payload.team,
             }
         default:
             return state;

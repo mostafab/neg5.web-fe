@@ -43,6 +43,7 @@ export const submitTeam = (team, successCallback) => async (dispatch, getState) 
             addAnother: Boolean(successCallback),
         }
     });
+    dispatch(selectTeam(createdTeam));
     if (successCallback) {
         successCallback();
     }
