@@ -28,7 +28,7 @@ export const cancelAddTeam = () => ({
     type: CANCEL_ADD_TEAM,
 })
 
-export const submitTeam = team => async (dispatch, getState) => {
+export const submitTeam = (team, successCallback) => async (dispatch, getState) => {
     dispatch({
         type: SUBMITTING_TEAM,
     })
@@ -40,6 +40,10 @@ export const submitTeam = team => async (dispatch, getState) => {
         type: SUBMIT_TEAM_SUCCESS,
         payload: {
             team: createdTeam,
+            addAnother: Boolean(successCallback),
         }
     });
+    if (successCallback) {
+        successCallback();
+    }
 }

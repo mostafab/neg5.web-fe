@@ -38,7 +38,7 @@ const reducer = (state = null, action) => {
             return {
                 ...state,
                 savingNewTeam: false,
-                addingTeam: false,
+                addingTeam: action.payload.addAnother || false,
                 teams: [...state.teams, action.payload.team],
                 selectedTeam: action.payload.team,
             }

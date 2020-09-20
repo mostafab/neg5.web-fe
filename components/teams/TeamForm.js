@@ -15,21 +15,14 @@ const initialFormValues = (numPlayers) => ({
 
 const TeamForm = ({
     numPlayers = 4,
-    onSubmit,
     formName,
-    form
+    form,
+    pools,
+    phases,
 }) => {
-    const onFinish = formValues => {
-        const sanitizedValues = {
-            ...formValues,
-            players: formValues.players.filter(p => p && p.name),
-        }
-        onSubmit(sanitizedValues);
-    }
     return (
         <div className="TeamForm">
             <Form
-                onFinish={onFinish}
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
                 name={formName}

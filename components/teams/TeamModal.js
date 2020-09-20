@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button, Form } from 'antd';
 
 import TeamForm from './TeamForm';
@@ -10,42 +10,36 @@ const TeamModal = ({
     numPlayers,
     onSubmitTeam,
     saving,
+    phases,
+    pools,
 }) => {
-    const [ forms, setForms ] = useState([
-        {
-            form: Form.useForm()[0],
-            formName: FORM_NAME + '0',
-        }
-    ]);
-    
-    const addNewForm = () => {
-        setForms([
-            ...forms,
-            {
-                form: Form.useForm()[0],
-                formName: FORM_NAME + forms.length,
+    const [ form ] = Form.useForm();
+    const onSubmit = callback => () => {
+        form.validateFields().then(() => {
+            const vals = form.getFieldsValue();
+            const fields = {
+                ...vals,
+                players: vals.players.filter(p => p && p.name)
             }
-        ])
-        console.log(forms);
+            onSubmitTeam(fields, callback);
+        });
     }
-
-    const onSubmit = formValues => onSubmitTeam(formValues)
     const footer = [
         <Button
-            key="add-another"
             type="default"
-            onClick={addNewForm}
+            key="add-another"
+            loading={saving}
+            onClick={onSubmit(() => form.resetFields())}
         >
-            Add Another Team
+            Save & Add Another
         </Button>,
         <Button
             key="submit"
-            form={FORM_NAME}
             type="primary"
-            htmlType="submit"
             loading={saving}
+            onClick={onSubmit()}
         >
-            Save Team
+            Save and Close
         </Button>
     ]
     return (
@@ -58,10 +52,12 @@ const TeamModal = ({
             maskClosable={false}
         >
             <TeamForm
-                formName={forms[forms.length - 1].formName}
+                formName={FORM_NAME}
                 onSubmit={onSubmit}
                 numPlayers={numPlayers}
-                form={forms[forms.length - 1].form}
+                form={form}
+                pools={pools}
+                phases={phases}
             />
         </Modal>
     )

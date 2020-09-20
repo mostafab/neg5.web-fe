@@ -32,6 +32,8 @@ const TournamentTeams = ({
                                 numPlayers={tournament.maxActivePlayersPerTeam}
                                 onSubmitTeam={submitTeam}
                                 saving={savingNewTeam}
+                                phases={tournament.phases}
+                                pools={tournament.divisions}
                             /> }
         </div>
     )
