@@ -1,5 +1,3 @@
-import UserApi from './../api/UserApi';
-
 import RLS from './../util/rls';
 
 export default class RequireLoggedInUser {

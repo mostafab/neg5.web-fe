@@ -1,3 +1,5 @@
+import { navigateTo } from 'react-server';
+
 import TournamentApi from "../api/TournamentApi";
 
 export const FETCHED_TOURNAMENTS = 'TOURNAMENT.FETCHED_TOURNAMENTS';
@@ -48,7 +50,7 @@ export const submitTournament = payload => async (dispatch) => {
     });
     try {
         const tournament = await TournamentApi.createTournament(payload);
-        dispatch(submitTournamentSuccess(tournament));
+        navigateTo(`/tournaments/${tournament.id}`, { bundleData: true });
     } catch (e) {
         dispatch(submitTournamentFailure());
     }

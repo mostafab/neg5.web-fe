@@ -7,7 +7,7 @@ export default ({
 }) => {
     return (
         <div className="TournamentPageContent">
-            {/* <TournamentCard {...tournament} /> */}
+            <TournamentCard {...tournament} />
         </div>
     )
 }
