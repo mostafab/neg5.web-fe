@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Row, Col } from 'antd';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import TournamentUtil from './../../util/tournament';
 import PoolCard from './PoolCard';
@@ -46,14 +48,16 @@ const TournamentPhases = ({
     })
     return (
         <div className="TournamentPhases">
-            <Card
-                title="Pools"
-                tabList={tabs}
-                activeTabKey={currentTab}
-                onTabChange={key => setTab(key)}
-            >
-                { tabComponents[currentTab] }
-            </Card>
+            <DndProvider backend={HTML5Backend}>
+                <Card
+                    title="Pools"
+                    tabList={tabs}
+                    activeTabKey={currentTab}
+                    onTabChange={key => setTab(key)}
+                >
+                    { tabComponents[currentTab] }
+                </Card>
+            </DndProvider>
         </div>
     )
 }
