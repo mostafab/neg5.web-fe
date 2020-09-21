@@ -9,7 +9,7 @@ const TournamentCard = ({
     questionSet
 }) => {
     return (
-        <Card title="Information">
+        <Card className="TournamentCard" title="Information">
 
         </Card>
     )
