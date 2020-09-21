@@ -7,7 +7,8 @@ import './TournamentPageContent.less';
 
 export default ({
     tournament,
-    teams
+    teams,
+    updateTeamPool,
 }) => {
     return (
         <div className="TournamentPageContent">
@@ -16,6 +17,7 @@ export default ({
                 phases={tournament.phases}
                 pools={tournament.divisions}
                 teams={teams}
+                onUpdateTeamPool={updateTeamPool}
             />
         </div>
     )

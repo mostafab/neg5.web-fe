@@ -12,6 +12,7 @@ const TournamentPhases = ({
     phases,
     pools,
     teams,
+    onUpdateTeamPool,
 }) => {
     const [ currentTab, setTab ] = useState(phases.length ? phases[0].id : null)
     const tabs = phases.map(p => ({
@@ -32,13 +33,20 @@ const TournamentPhases = ({
                             <PoolCard
                                 pool={{ name: 'Unassigned' }}
                                 teams={teamsByPool[TournamentUtil.UNASSIGNED_POOL_KEY]}
+                                phaseId={phase.id}
+                                onDropTeam={onUpdateTeamPool}
                             />
                         </Col>
                     ]
                     .concat(
                         pools.map(pool => (
                             <Col span={8} key={pool.id} className="pool-card-container">
-                                <PoolCard pool={pool} teams={teamsByPool[pool.id]} />
+                                <PoolCard
+                                    pool={pool}
+                                    teams={teamsByPool[pool.id]}
+                                    phaseId={phase.id}
+                                    onDropTeam={onUpdateTeamPool}
+                                />
                             </Col>
                         ))
                     )

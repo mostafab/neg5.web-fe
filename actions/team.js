@@ -6,6 +6,7 @@ export const ADD_TEAM = 'TEAM.ADD_TEAM';
 export const CANCEL_ADD_TEAM = 'TEAM.CANCEL_ADD_TEAM';
 export const SUBMITTING_TEAM = 'TEAM.SUBMITTING_TEAM';
 export const SUBMIT_TEAM_SUCCESS = 'TEAM.SUBMIT_TEAM_SUCCESS';
+export const UPDATE_TEAM_SUCCESS = 'TEAM.UPDATE_TEAM_SUCCESS';
 
 export const selectTeam = team => {
     // TODO This is hacky as shit. Do better
@@ -47,4 +48,26 @@ export const submitTeam = (team, successCallback) => async (dispatch, getState) 
     if (successCallback) {
         successCallback();
     }
+}
+
+export const updateTeamPool = ({
+    phaseId,
+    teamId,
+    targetPoolId
+}) => async (dispatch, getState) => {
+    const teams = getState().tournamentTeams.teams;
+    const newTeamPools = teams.find(t => t.id === teamId)
+        .divisions.filter(d => d.phaseId !== phaseId)
+        .map(d => d.id);
+    
+    if (targetPoolId) {
+        newTeamPools.push(targetPoolId);
+    }
+    const updatedTeam = await TeamApi.updateTeamPools(teamId, newTeamPools);
+    dispatch({
+        type: UPDATE_TEAM_SUCCESS,
+        payload: {
+            team: updatedTeam,
+        }
+    });
 }
