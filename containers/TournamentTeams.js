@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { orderBy, keyBy } from 'lodash';
 
-import { selectTeam } from './../actions/team';
+import { selectTeam, addTeam, cancelAddTeam, submitTeam } from './../actions/team';
 import TournamentTeams from './../components/teams/TournamentTeams';
 
 const enrichSelectedTeam = (selectedTeam, teams, matches) => {
@@ -48,12 +48,17 @@ const mapStateToProps = state => {
             state.tournamentMatches.matches,
         ),
         tournament: state.currentTournament,
+        addingTeam: state.tournamentTeams.addingTeam,
+        savingNewTeam: state.tournamentTeams.savingNewTeam,
       }
 };
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         selectTeam,
+        addTeam,
+        cancelAddTeam,
+        submitTeam,
     }, dispatch);
 }
 

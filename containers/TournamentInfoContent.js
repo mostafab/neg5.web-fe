@@ -4,6 +4,7 @@ import TournamentPageContent from './../components/tournament/TournamentPageCont
 
 const mapStateToProps = state => ({
   tournament: state.currentTournament,
+  teams: state.tournamentTeams.teams,
 });
 
 export default connect(mapStateToProps, null)(TournamentPageContent);

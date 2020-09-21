@@ -33,9 +33,9 @@ const renderTournaments = (title, tournaments) => {
 }
 
 const renderEmptyState = (userTournaments, onClick) => {
-    if (userTournaments.userOwnedTournaments || userTournaments.collaboratingTournaments) {
-        return null;
-    }
+    // if (userTournaments.userOwnedTournaments || userTournaments.collaboratingTournaments) {
+    //     return null;
+    // }
     const description = (
         <Fragment>
             You aren't part of any tournaments yet.
@@ -77,8 +77,8 @@ const UserTournaments = ({
                     />
             }
             { renderEmptyState(userTournaments, startCreateTournament) }
-            { renderTournaments('Your Tournaments', userTournaments.userOwnedTournaments) }
-            { renderTournaments('Shared with You', userTournaments.collaboratingTournaments) }
+            {/* { renderTournaments('Your Tournaments', userTournaments.userOwnedTournaments) }
+            { renderTournaments('Shared with You', userTournaments.collaboratingTournaments) } */}
         </div>
     )
 }

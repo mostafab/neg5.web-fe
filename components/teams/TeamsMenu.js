@@ -10,6 +10,7 @@ const TeamsMenu = ({
     teams,
     onSelectTeam,
     selectedTeam,
+    onAdd,
 }) => {
     const selectedTeamKey = selectedTeam ? [`team-${selectedTeam.id}`] : [];
     return (
@@ -20,7 +21,7 @@ const TeamsMenu = ({
                 defaultOpenKeys={["teams"]}
                 selectedKeys={selectedTeamKey}
             >
-                <Menu.Item key="add-team">
+                <Menu.Item key="add-team" onClick={onAdd}>
                     Add Team
                 </Menu.Item>
                 <SubMenu

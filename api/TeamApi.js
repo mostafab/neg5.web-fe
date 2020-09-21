@@ -7,5 +7,13 @@ export default {
                 .then(res => resolve(res.body))
                 .catch(err => reject(err));
         });
-    }
+    },
+
+    addTeam(teamPayload) {
+        return new Promise((resolve, reject) => {
+            return ReactServerAgent.post('/neg5-api/teams', teamPayload)
+                .then(res => resolve(res.body))
+                .catch(err => reject(err));
+        });
+    },
 }
