@@ -5,16 +5,22 @@ import { DropTarget } from 'react-dnd';
 import { DraggableTypes } from './../../util/drag';
 import PoolTeamRow from './PoolTeamRow';
 
+import './PoolCard.less';
+
 const PoolCard = ({
     pool,
     phaseId,
     teams = [],
     onDropTeam,
+    isOver,
     connectDropTarget
 }) => {
     return connectDropTarget(
         <div>
-            <Card className="PoolCard" title={pool.name}>
+            <Card
+                className={`PoolCard ${isOver ? 'hover' : ''}`}
+                title={pool.name}
+            >
                 {
                     teams.map(t => <PoolTeamRow team={t} key={t.id} phaseId={phaseId} />)
                 }
