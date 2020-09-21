@@ -6,12 +6,17 @@ import TournamentPhases from './TournamentPhases';
 import './TournamentPageContent.less';
 
 export default ({
-    tournament
+    tournament,
+    teams
 }) => {
     return (
         <div className="TournamentPageContent">
             <TournamentCard {...tournament} />
-            <TournamentPhases phases={tournament.phases} pools={tournament.divisions} />
+            <TournamentPhases
+                phases={tournament.phases}
+                pools={tournament.divisions}
+                teams={teams}
+            />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Row, Col } from 'antd';
 
-import tournamentUtil from './../../util/tournament';
+import TournamentUtil from './../../util/tournament';
 import PoolCard from './PoolCard';
 
 import './TournamentPhases.less';
@@ -9,28 +9,34 @@ import './TournamentPhases.less';
 const TournamentPhases = ({
     phases,
     pools,
+    teams,
 }) => {
     const [ currentTab, setTab ] = useState(phases.length ? phases[0].id : null)
     const tabs = phases.map(p => ({
         key: p.id,
         tab: p.name,
     }));
-    const poolsByPhase = tournamentUtil.partitionPoolsByPhase(pools);
+    const poolsByPhase = TournamentUtil.partitionPoolsByPhase(pools);
     const tabComponents = {};
-    phases.forEach(p => {
-        const pools = poolsByPhase[p.id] || [];
-        tabComponents[p.id] = (
+    phases.forEach(phase => {
+        const teamsByPool = TournamentUtil
+            .groupTeamsByPools(phase.id, poolsByPhase[phase.id] || [], teams);
+        const pools = poolsByPhase[phase.id] || [];
+        tabComponents[phase.id] = (
             <Row gutter={16}>
                 {
                     [
-                        <Col span={8}>
-                            <PoolCard pool={{ name: 'Unassigned' }}></PoolCard>
+                        <Col span={8} key="unassigned">
+                            <PoolCard
+                                pool={{ name: 'Unassigned' }}
+                                teams={teamsByPool[TournamentUtil.UNASSIGNED_POOL_KEY]}
+                            />
                         </Col>
                     ]
                     .concat(
                         pools.map(pool => (
                             <Col span={8} key={pool.id} className="pool-card-container">
-                                <PoolCard pool={pool} />
+                                <PoolCard pool={pool} teams={teamsByPool[pool.id]} />
                             </Col>
                         ))
                     )
