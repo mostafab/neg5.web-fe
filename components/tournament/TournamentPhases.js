@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col } from 'antd';
+import { Card, Row, Col, Button, Input } from 'antd';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -8,11 +8,33 @@ import PoolCard from './PoolCard';
 
 import './TournamentPhases.less';
 
+const NewPhaseInput = ({
+    onSubmitPhase
+}) => {
+    const [phaseName, setPhaseName] = useState('');
+
+    const onPressEnter = () => {
+        const trimmed = phaseName.trim();
+        if (trimmed) {
+            onSubmitPhase(trimmed, () => setPhaseName(''));
+        } 
+    }
+    return (
+        <Input
+            placeholder="Add a new phase"
+            value={phaseName}
+            onChange={e => setPhaseName(e.target.value)}
+            onPressEnter={onPressEnter}
+        />
+    )
+}
+
 const TournamentPhases = ({
-    phases,
-    pools,
-    teams,
+    phases = [],
+    pools = [],
+    teams = [],
     onUpdateTeamPool,
+    onAddPhase,
 }) => {
     const [ currentTab, setTab ] = useState(phases.length ? phases[0].id : null)
     const tabs = phases.map(p => ({
@@ -54,10 +76,18 @@ const TournamentPhases = ({
             </Row>
         )
     })
+
+    const onSubmitPhase = (name, callback) => {
+        onAddPhase(name, newPhase => {
+            callback();
+            setTab(newPhase.id)
+        });
+    }
     return (
         <div className="TournamentPhases">
             <DndProvider backend={HTML5Backend}>
                 <Card
+                    extra={<NewPhaseInput onSubmitPhase={onSubmitPhase} />}
                     title="Pools"
                     tabList={tabs}
                     activeTabKey={currentTab}

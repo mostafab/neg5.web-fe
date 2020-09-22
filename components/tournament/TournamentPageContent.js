@@ -9,6 +9,7 @@ export default ({
     tournament,
     teams,
     updateTeamPool,
+    onAddPhase
 }) => {
     return (
         <div className="TournamentPageContent">
@@ -18,6 +19,7 @@ export default ({
                 pools={tournament.divisions}
                 teams={teams}
                 onUpdateTeamPool={updateTeamPool}
+                onAddPhase={onAddPhase}
             />
         </div>
     )
