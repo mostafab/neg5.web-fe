@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Button, Input } from 'antd';
+import { Card, Row, Col, Input } from 'antd';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -29,12 +29,34 @@ const NewPhaseInput = ({
     )
 }
 
+const NewPoolInput = ({ onAddPool, phaseId }) => {
+    const [poolName, setPoolName] = useState('');
+
+    const onPressEnter = () => {
+        const trimmed = poolName.trim();
+        if (trimmed) {
+            onAddPool(trimmed, phaseId, () => setPoolName(''));
+        }
+    }
+    return (
+        <Card title="Add a new Pool">
+            <Input
+                placeholder="Add a new pool"
+                value={poolName}
+                onChange={e => setPoolName(e.target.value)}
+                onPressEnter={onPressEnter}
+            />
+        </Card>
+    )
+}
+
 const TournamentPhases = ({
     phases = [],
     pools = [],
     teams = [],
     onUpdateTeamPool,
     onAddPhase,
+    onAddPool,
 }) => {
     const [ currentTab, setTab ] = useState(phases.length ? phases[0].id : null)
     const tabs = phases.map(p => ({
@@ -49,6 +71,12 @@ const TournamentPhases = ({
         const pools = poolsByPhase[phase.id] || [];
         tabComponents[phase.id] = (
             <Row gutter={16}>
+                <Col span={8} key="new-pool">
+                    <NewPoolInput
+                        phaseId={phase.id}
+                        onAddPool={onAddPool}
+                    />
+                </Col>
                 {
                     [
                         <Col span={8} key="unassigned">

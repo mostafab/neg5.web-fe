@@ -2,6 +2,7 @@ import { orderBy } from 'lodash';
 
 import { FETCH_TOURNAMENT_SUCCESS } from './../actions/single-tournament';
 import { ADD_PHASE_SUCCESS } from './../actions/phase';
+import { ADD_POOL_SUCCESS } from './../actions/pool';
 
 const reducer = (state = null, action) => {
     switch (action.type) {
@@ -14,6 +15,11 @@ const reducer = (state = null, action) => {
             return {
                 ...state,
                 phases: [...state.phases, action.payload.phase],
+            }
+        case ADD_POOL_SUCCESS:
+            return {
+                ...state,
+                divisions: [...state.divisions, action.payload.pool],
             }
         default:
             return state;
