@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Input } from 'antd';
+import { Card, Row, Col, Input, Empty } from 'antd';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -22,6 +22,7 @@ const NewPhaseInput = ({
     return (
         <Input
             placeholder="Add a new phase"
+            autoComplete="off"
             value={phaseName}
             onChange={e => setPhaseName(e.target.value)}
             onPressEnter={onPressEnter}
@@ -39,7 +40,7 @@ const NewPoolInput = ({ onAddPool, phaseId }) => {
         }
     }
     return (
-        <Card title="Add a new Pool">
+        <Card title="Add a new Pool" className="NewPoolInput">
             <Input
                 placeholder="Add a new pool"
                 value={poolName}
@@ -61,7 +62,7 @@ const TournamentPhases = ({
     const [ currentTab, setTab ] = useState(phases.length ? phases[0].id : null)
     const tabs = phases.map(p => ({
         key: p.id,
-        tab: p.name,
+        tab:  p.name,
     }));
     const poolsByPhase = TournamentUtil.partitionPoolsByPhase(pools);
     const tabComponents = {};
@@ -71,15 +72,15 @@ const TournamentPhases = ({
         const pools = poolsByPhase[phase.id] || [];
         tabComponents[phase.id] = (
             <Row gutter={16}>
-                <Col span={8} key="new-pool">
-                    <NewPoolInput
-                        phaseId={phase.id}
-                        onAddPool={onAddPool}
-                    />
-                </Col>
-                {
-                    [
-                        <Col span={8} key="unassigned">
+                <Col span={8}>
+                    <Row>
+                        <Col span={24} key="new-pool">
+                            <NewPoolInput
+                                phaseId={phase.id}
+                                onAddPool={onAddPool}
+                            />
+                        </Col>
+                        <Col span={24} key="unassigned">
                             <PoolCard
                                 pool={{ name: 'Unassigned' }}
                                 teams={teamsByPool[TournamentUtil.UNASSIGNED_POOL_KEY]}
@@ -87,20 +88,30 @@ const TournamentPhases = ({
                                 onDropTeam={onUpdateTeamPool}
                             />
                         </Col>
-                    ]
-                    .concat(
-                        pools.map(pool => (
-                            <Col span={8} key={pool.id} className="pool-card-container">
-                                <PoolCard
-                                    pool={pool}
-                                    teams={teamsByPool[pool.id]}
-                                    phaseId={phase.id}
-                                    onDropTeam={onUpdateTeamPool}
-                                />
-                            </Col>
-                        ))
-                    )
-                }
+                    </Row>
+                </Col>
+                <Col span={16}>
+                    <Row gutter={16}>
+                        {
+                            [
+
+                            ]
+                            .concat(
+                                pools.map(pool => (
+                                    <Col span={8} key={pool.id} className="pool-card-container">
+                                        <PoolCard
+                                            pool={pool}
+                                            teams={teamsByPool[pool.id]}
+                                            phaseId={phase.id}
+                                            onDropTeam={onUpdateTeamPool}
+                                        />
+                                    </Col>
+                                ))
+                            )
+                        }
+                    </Row>
+                </Col>
+                
             </Row>
         )
     })
@@ -115,13 +126,23 @@ const TournamentPhases = ({
         <div className="TournamentPhases">
             <DndProvider backend={HTML5Backend}>
                 <Card
-                    extra={<NewPhaseInput onSubmitPhase={onSubmitPhase} />}
+                    extra={phases.length ? <NewPhaseInput onSubmitPhase={onSubmitPhase} /> : null}
                     title="Pools"
                     tabList={tabs}
                     activeTabKey={currentTab}
                     onTabChange={key => setTab(key)}
                 >
-                    { tabComponents[currentTab] }
+                    { phases.length
+                        ? tabComponents[currentTab]
+                        : (
+                            <Empty
+                                className="no-phases"
+                                description="Add your tournament's first phase"
+                            >
+                                <NewPhaseInput onSubmitPhase={onSubmitPhase} />
+                            </Empty>
+                        )
+                    }
                 </Card>
             </DndProvider>
         </div>
