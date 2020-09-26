@@ -10,8 +10,7 @@ const TeamModal = ({
     numPlayers,
     onSubmitTeam,
     saving,
-    phases,
-    pools,
+    onSelectTeam,
 }) => {
     const [ form ] = Form.useForm();
     const onSubmit = callback => () => {
@@ -29,7 +28,10 @@ const TeamModal = ({
             type="default"
             key="add-another"
             loading={saving}
-            onClick={onSubmit(() => form.resetFields())}
+            onClick={onSubmit(team => {
+                form.resetFields();
+                onSelectTeam && onSelectTeam(team);
+            })}
         >
             Save & Add Another
         </Button>,
@@ -56,8 +58,6 @@ const TeamModal = ({
                 onSubmit={onSubmit}
                 numPlayers={numPlayers}
                 form={form}
-                pools={pools}
-                phases={phases}
             />
         </Modal>
     )

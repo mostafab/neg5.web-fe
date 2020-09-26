@@ -31,6 +31,7 @@ const TournamentTeams = ({
                                 onCancel={cancelAddTeam}
                                 numPlayers={tournament.maxActivePlayersPerTeam}
                                 onSubmitTeam={submitTeam}
+                                onSelectTeam={selectTeam}
                                 saving={savingNewTeam}
                                 phases={tournament.phases}
                                 pools={tournament.divisions}

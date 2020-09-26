@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { orderBy } from 'lodash';
 
-import { updateTeamPool } from './../actions/team';
+import { updateTeamPool, addTeam, cancelAddTeam, submitTeam } from './../actions/team';
 import { onAddPhase } from './../actions/phase';
 import { onAddPool } from './../actions/pool';
 
@@ -9,7 +10,9 @@ import TournamentPageContent from './../components/tournament/TournamentPageCont
 
 const mapStateToProps = state => ({
   tournament: state.currentTournament,
-  teams: state.tournamentTeams.teams,
+  teams: orderBy(state.tournamentTeams.teams, ['name']),
+  addingTeam: state.tournamentTeams.addingTeam,
+  savingTeam: state.tournamentTeams.savingNewTeam,
 });
 
 function mapDispatchToProps(dispatch) {
@@ -17,6 +20,9 @@ function mapDispatchToProps(dispatch) {
     updateTeamPool,
     onAddPhase,
     onAddPool,
+    addTeam,
+    cancelAddTeam,
+    submitTeam,
   }, dispatch);
 }
 

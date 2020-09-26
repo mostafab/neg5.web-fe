@@ -98,7 +98,7 @@ const TournamentPhases = ({
                             ]
                             .concat(
                                 pools.map(pool => (
-                                    <Col span={8} key={pool.id} className="pool-card-container">
+                                    <Col span={12} key={pool.id} className="pool-card-container">
                                         <PoolCard
                                             pool={pool}
                                             teams={teamsByPool[pool.id]}
