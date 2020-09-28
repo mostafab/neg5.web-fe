@@ -82,7 +82,7 @@ const TournamentPhases = ({
                         </Col>
                         <Col span={24} key="unassigned">
                             <PoolCard
-                                pool={{ name: 'Unassigned' }}
+                                pool={{ name: 'Unassigned Teams' }}
                                 teams={teamsByPool[TournamentUtil.UNASSIGNED_POOL_KEY]}
                                 phaseId={phase.id}
                                 onDropTeam={onUpdateTeamPool}
@@ -132,17 +132,7 @@ const TournamentPhases = ({
                     activeTabKey={currentTab}
                     onTabChange={key => setTab(key)}
                 >
-                    { phases.length
-                        ? tabComponents[currentTab]
-                        : (
-                            <Empty
-                                className="no-phases"
-                                description="Add your tournament's first phase"
-                            >
-                                <NewPhaseInput onSubmitPhase={onSubmitPhase} />
-                            </Empty>
-                        )
-                    }
+                    { tabComponents[currentTab] }
                 </Card>
             </DndProvider>
         </div>

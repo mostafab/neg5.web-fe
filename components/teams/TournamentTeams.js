@@ -1,32 +1,41 @@
 import React from 'react';
+import { Button } from 'antd';
+import { PlusSquareOutlined } from '@ant-design/icons';
 
-import TeamsMenu from './TeamsMenu';
 import TeamView from './TeamView';
 import NoTeams from './NoTeams';
 import TeamModal from './TeamModal';
+import TeamsGallery from './TeamsGallery';
 
 import './TournamentTeams.less';
 
 const TournamentTeams = ({
     teams,
     selectTeam,
-    selectedTeam,
     tournament,
     addTeam,
     addingTeam,
     cancelAddTeam,
     submitTeam,
-    savingNewTeam
+    savingNewTeam,
+    savePlayer,
 }) => {
     return (
         <div className="TournamentTeams">
-            <TeamsMenu teams={teams}
-                onAdd={addTeam}
-                onSelectTeam={selectTeam}
-                selectedTeam={selectedTeam}
+            <Button
+                className="add-team"
+                type="default"
+                onClick={() => addTeam()}
+                icon={<PlusSquareOutlined />}
+            >
+                Add Team
+            </Button>
+            <TeamsGallery
+                teams={teams}
+                phases={tournament.phases}
+                onSavePlayer={savePlayer}
             />
             { teams.length === 0 && <NoTeams onAdd={addTeam} /> }
-            { selectedTeam && <TeamView {...selectedTeam} tournamentPools={tournament.divisions} tournamentPhases={tournament.phases} /> }
             { addingTeam && <TeamModal
                                 onCancel={cancelAddTeam}
                                 numPlayers={tournament.maxActivePlayersPerTeam}

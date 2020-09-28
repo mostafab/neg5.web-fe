@@ -7,6 +7,9 @@ import {
     SUBMIT_TEAM_SUCCESS,
     UPDATE_TEAM_SUCCESS,
 } from './../actions/team';
+import {
+    SAVE_PLAYER_SUCCESS
+} from './../actions/player';
 
 const reducer = (state = null, action) => {
     switch (action.type) {
@@ -49,6 +52,25 @@ const reducer = (state = null, action) => {
                 teams: state.teams.map(t => {
                     if (t.id === updatedTeam.id) {
                         return updatedTeam;
+                    }
+                    return t;
+                }),
+            }
+        case SAVE_PLAYER_SUCCESS:
+            const player = action.payload.player;
+            return {
+                ...state,
+                teams: state.teams.map(t => {
+                    if (t.id === player.teamId) {
+                        return {
+                            ...t,
+                            players: t.players.map(p => {
+                                if (p.id === player.id) {
+                                    return player;
+                                }
+                                return p;
+                            }),
+                        }
                     }
                     return t;
                 }),

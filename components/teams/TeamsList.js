@@ -32,6 +32,7 @@ const TeamsList = ({
                 extra={
                     <Button
                         type="default"
+                        title="Add a team"
                         onClick={() => onAddTeam()}
                         icon={<PlusOutlined />}
                     />
