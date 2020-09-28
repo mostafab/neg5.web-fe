@@ -7,6 +7,7 @@ import {
     addTeam,
     cancelAddTeam,
     submitTeam,
+    updateTeam,
 } from './../actions/team';
 import {
     savePlayer
@@ -69,6 +70,7 @@ function mapDispatchToProps(dispatch) {
         cancelAddTeam,
         submitTeam,
         savePlayer,
+        updateTeam,
     }, dispatch);
 }
 

@@ -49,6 +49,19 @@ export const submitTeam = (team, successCallback) => async (dispatch, getState) 
     }
 }
 
+export const updateTeam = ({
+    id,
+    name,
+}) => async dispatch => {
+    const updated = await TeamApi.updateTeam({ id, name });
+    dispatch({
+        type: UPDATE_TEAM_SUCCESS,
+        payload: {
+            team: updated,
+        }
+    });
+}
+
 export const updateTeamPool = ({
     phaseId,
     teamId,

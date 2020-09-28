@@ -9,6 +9,7 @@ const TeamsGallery = ({
     teams,
     phases,
     onSavePlayer,
+    onUpdateTeam,
 }) => {
     return (
         <div className="TeamsGallery">
@@ -16,7 +17,13 @@ const TeamsGallery = ({
                 {
                     teams.map(t => (
                         <Col span={6} key={t.id}>
-                            <TeamCard team={t} phases={phases} onSavePlayer={onSavePlayer} />
+                            <TeamCard
+                                team={t}
+                                phases={phases}
+                                onSavePlayer={onSavePlayer}
+                                onSaveTeam={onUpdateTeam}
+                                editable
+                            />
                         </Col>
                     ))
                 }

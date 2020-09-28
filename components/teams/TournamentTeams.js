@@ -19,6 +19,7 @@ const TournamentTeams = ({
     submitTeam,
     savingNewTeam,
     savePlayer,
+    updateTeam,
 }) => {
     return (
         <div className="TournamentTeams">
@@ -34,6 +35,7 @@ const TournamentTeams = ({
                 teams={teams}
                 phases={tournament.phases}
                 onSavePlayer={savePlayer}
+                onUpdateTeam={updateTeam}
             />
             { teams.length === 0 && <NoTeams onAdd={addTeam} /> }
             { addingTeam && <TeamModal

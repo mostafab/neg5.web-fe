@@ -10,6 +10,7 @@ const isValidName = val => val && val.trim().length > 0;
 const PlayerRow = ({
     player,
     onSave,
+    editable,
 }) => {
     const onChange = val => {
         if (isValidName(val)) {
@@ -21,8 +22,8 @@ const PlayerRow = ({
     }
     return (
         <Text
-            className="PlayerRow"
-            editable={{ onChange, tooltip: false }}
+            className="edit-row"
+            editable={editable ? { onChange, tooltip: false } : false}
         >
             { player.name }
         </Text>
@@ -34,10 +35,28 @@ const TeamCard = ({
     phases,
     onSavePlayer,
     onSaveTeam,
+    editable,
 }) => {
+    const onChange = val => {
+        if (isValidName(val)) {
+            console.log(val);
+            onSaveTeam({
+                ...team,
+                name: val,
+            });
+        }
+    }
+    const title = (
+        <Text
+            className="edit-row"
+            editable={editable ? { onChange, tooltip: false } : false}
+        >
+            { team.name }
+        </Text>
+    )
     return (
         <div className="TeamCard">
-            <Card title={team.name}>
+            <Card title={title}>
                 <List
                     className="players-list"
                     header={<b>Players</b>}
@@ -48,6 +67,7 @@ const TeamCard = ({
                           <PlayerRow
                             player={player}
                             onSave={onSavePlayer}
+                            editable={editable}
                         />
                         </List.Item>
                       )}
