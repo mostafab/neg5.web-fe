@@ -23,17 +23,17 @@ const TournamentTeams = ({
 }) => {
     return (
         <div className="TournamentTeams">
-            <Button
-                className="add-team"
-                type="default"
-                onClick={() => addTeam()}
-                icon={<PlusSquareOutlined />}
-            >
-                Add Team
-            </Button>
+            { teams.length !== 0 && <Button
+                    className="add-team"
+                    type="default"
+                    onClick={() => addTeam()}
+                    icon={<PlusSquareOutlined />}
+                >
+                    Add Team
+                </Button>
+            }
             <TeamsGallery
                 teams={teams}
-                phases={tournament.phases}
                 onSavePlayer={savePlayer}
                 onUpdateTeam={updateTeam}
             />

@@ -1,0 +1,29 @@
+@import './../styles/colors.less';
+
+.MatchCard {
+    .ant-card-head-title {
+        overflow: auto;
+        white-space: normal;
+    }
+
+    .statistics {
+        display: flex;
+
+        & > .ant-statistic:first-child {
+            width: 20%;
+        }
+    }
+
+    .answer-type {
+        margin-right: .5rem;
+        &.Power .ant-badge-count {
+            background: @answer-type-power;
+        }
+        &.Neg .ant-badge-count {
+            background: @answer-type-neg;
+        }
+        &.Base .ant-badge-count {
+            background: @answer-type-base;
+        }
+    }
+}

@@ -7,7 +7,6 @@ import './TeamsGallery.less';
 
 const TeamsGallery = ({
     teams,
-    phases,
     onSavePlayer,
     onUpdateTeam,
 }) => {
@@ -19,7 +18,6 @@ const TeamsGallery = ({
                         <Col span={6} key={t.id}>
                             <TeamCard
                                 team={t}
-                                phases={phases}
                                 onSavePlayer={onSavePlayer}
                                 onSaveTeam={onUpdateTeam}
                                 editable

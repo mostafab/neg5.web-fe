@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, List, Typography } from 'antd';
 
 import './TeamCard.less';
@@ -32,7 +32,6 @@ const PlayerRow = ({
 
 const TeamCard = ({
     team,
-    phases,
     onSavePlayer,
     onSaveTeam,
     editable,
@@ -56,7 +55,7 @@ const TeamCard = ({
     )
     return (
         <div className="TeamCard">
-            <Card title={title}>
+            <Card title={title} size="small">
                 <List
                     className="players-list"
                     header={<b>Players</b>}

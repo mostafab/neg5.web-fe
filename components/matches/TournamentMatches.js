@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Divider } from 'antd';
 
-import MatchesMenu from './MatchesMenu';
+import RoundMatches from './RoundMatches';
+
+import './TournamentMatches.less';
 
 const TournamentMatches = ({
     matches,
@@ -8,7 +11,17 @@ const TournamentMatches = ({
 }) => {
     return (
         <div className="TournamentMatches">
-            <MatchesMenu matches={matches} numMatches={numMatches} />
+            {
+                matches.map(matchRound => (
+                    <Fragment key={matchRound.round}>
+                        <RoundMatches
+                            round={matchRound.round}
+                            matches={matchRound.matches}
+                        />
+                        <Divider />
+                    </Fragment>
+                ))
+            }
         </div>
     )
 }
