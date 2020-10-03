@@ -11,7 +11,7 @@ const RoundMatches = ({
 }) => {
     return (
         <div className="RoundMatches">
-            <Title level={3}>Round { round }</Title>
+            <Title level={3}>Round { round } ({matches.length})</Title>
             <MatchesGallery matches={matches} />
         </div>
     )

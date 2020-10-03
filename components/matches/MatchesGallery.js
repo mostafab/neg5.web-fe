@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 
 import MatchCard from './MatchCard';
 
+import './MatchesGallery.less';
+
 const MatchesGallery = ({
     matches,
 }) => {

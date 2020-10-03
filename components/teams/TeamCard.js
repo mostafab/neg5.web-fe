@@ -35,10 +35,10 @@ const TeamCard = ({
     onSavePlayer,
     onSaveTeam,
     editable,
+    className = '',
 }) => {
     const onChange = val => {
         if (isValidName(val)) {
-            console.log(val);
             onSaveTeam({
                 ...team,
                 name: val,
@@ -54,7 +54,7 @@ const TeamCard = ({
         </Text>
     )
     return (
-        <div className="TeamCard">
+        <div className={`TeamCard ${className}`}>
             <Card title={title} size="small">
                 <List
                     className="players-list"

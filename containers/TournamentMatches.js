@@ -30,10 +30,14 @@ const normalizeMatches = (matches, teams, tossupValues) => {
                 return orderBy(result, ['value']);
             })(),
         })),
-        round: m.round || 'Unspecified'
+        round: m.round || 'Unspecified',
+        formattedCreatedAt: new Date(m.addedAt).toLocaleString('en-US'),
     }));
 
-    const matchesByRound = groupBy(normalizedMatches, 'round');
+    const matchesByRound = groupBy(
+        orderBy(normalizedMatches, ['addedAt'], ['desc']),
+        'round'
+    );
     const result = Object.keys(matchesByRound)
         .map(round => ({
             round,
