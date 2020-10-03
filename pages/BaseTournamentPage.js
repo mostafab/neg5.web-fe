@@ -87,11 +87,11 @@ export default class BaseTournamentPage {
     }
 
     getElements() {
-        const title = this.store.getState().currentTournament.name;
+        const tournament = this.store.getState().currentTournament;
         return [
             <RootElement key={0} when={this.storeAdapter.when([REDUCER_KEYS.currentUser])}>
                 <Provider store={this.store}>
-                    <UserHeader title={title} />
+                    <UserHeader title={tournament.name} />
                 </Provider>
             </RootElement>,
             <RootContainer key={1} className="TournamentPageMainContext">

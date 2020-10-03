@@ -16,4 +16,20 @@ export default {
                 .catch(err => reject(err));
         });
     },
+
+    updateTeam(teamPayload) {
+        return new Promise((resolve, reject) => {
+            return ReactServerAgent.put(`/neg5-api/teams/${teamPayload.id}`, teamPayload)
+                .then(res => resolve(res.body))
+                .catch(err => reject(err));
+        });
+    },
+
+    updateTeamPools(teamId, poolIds) {
+        return new Promise((resolve, reject) => {
+            return ReactServerAgent.put(`/neg5-api/teams/${teamId}/pools`, { poolIds })
+                .then(res => resolve(res.body))
+                .catch(err => reject(err));
+        });
+    }
 }

@@ -17,8 +17,6 @@ const TeamForm = ({
     numPlayers = 4,
     formName,
     form,
-    pools,
-    phases,
 }) => {
     return (
         <div className="TeamForm">

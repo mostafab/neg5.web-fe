@@ -5,12 +5,14 @@ import './UserHeader.less';
 
 const UserHeader = ({
     currentUser,
-    title
+    title,
+    subtitle,
 }) => {
     return (
         <PageHeader
             className="site-page-header UserHeader"
             title={title}
+            subTitle={subtitle}
         />
     )
 }
