@@ -34,7 +34,7 @@
     "react-server-redux": "0.8.0",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "superagent": "1.8.4",
+    "superagent": "3.7.0",
     "webpack": "4.44.1",
     "webpack-dev-server": "3.11.0",
     "webpack-stats-plugin": "0.3.2"
