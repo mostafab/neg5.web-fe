@@ -9,7 +9,10 @@ import { onAddPool } from './../actions/pool';
 import TournamentPageContent from './../components/tournament/TournamentPageContent';
 
 const mapStateToProps = state => ({
-  tournament: state.currentTournament,
+  tournament: {
+    ...state.currentTournament,
+    phases: orderBy(state.currentTournament.phases, ['addedAt'], ['desc']),
+  },
   teams: orderBy(state.tournamentTeams.teams, ['name']),
   addingTeam: state.tournamentTeams.addingTeam,
   savingTeam: state.tournamentTeams.savingNewTeam,

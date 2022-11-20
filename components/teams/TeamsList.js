@@ -47,9 +47,7 @@ const TeamsList = ({
                     }}
                     renderItem={team => (
                         <List.Item>
-                            <Link href={`/tournaments/${tournamentId}/teams/${team.id}`}>
-                                { team.name }
-                            </Link>
+                            { team.name }
                         </List.Item>
                     )}
                 />
