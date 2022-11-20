@@ -23,6 +23,7 @@ export default (webpackConfig) => {
                             loader: 'less-loader' // compiles Less to CSS
                         }
                     ],
+                    exclude: /node_modules/
                 },
                 {
                     test: /\.(js|jsx)$/,
@@ -37,6 +38,7 @@ export default (webpackConfig) => {
                 {
                     test: /\.css$/,
                     use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                    exclude: /node_modules/
                 },
                 {
                     test: /\.json/,
